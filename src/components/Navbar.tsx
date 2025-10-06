@@ -105,9 +105,9 @@ export default function Navbar() {
 
           <Link
             to="/announcements"
-            className="text-white hover:text-blue-400 transition"
+            className="flex items-center text-white hover:text-blue-400 transition"
             onClick={() => setMenuOpen(false)}
-          >
+          > <Megaphone size={18} className="mr-1" />
             Announcements
           </Link>
 
@@ -116,7 +116,7 @@ export default function Navbar() {
             className="flex items-center text-white hover:text-amber-400 transition"
             onClick={() => setMenuOpen(false)}
           >
-            <Megaphone size={18} className="mr-1" />
+            {/* <Megaphone size={18} className="mr-1" /> */}
             About
           </Link>
 

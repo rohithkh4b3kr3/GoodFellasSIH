@@ -199,7 +199,7 @@ export default function Dashboard() {
         </div>
 
         <div className="flex flex-col items-center justify-center">
-          <h3 className="text-lg mb-2 capitalize"> HMPI distribution accross {mapView}</h3>
+          <h3 className="text-lg mb-2 capitalize"> HMPI distribution across {mapView}</h3>
           <div className="w-full h-auto">{renderMapContent()}</div>
         </div>
       </div>
