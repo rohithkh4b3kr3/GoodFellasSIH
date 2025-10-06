@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Megaphone } from "lucide-react";
 
-// Sample announcements (unchanged)
-const announcements = [
+// Sample announcements
+const announcements: { date: string; text: string }[] = [
   { date: "2025-10-01", text: "Water quality report for October 2025 released." },
   { date: "2025-09-20", text: "New AI-powered HMPI calculator is live for public use." },
   { date: "2025-09-10", text: "NGOs can now upload bulk CSV water test data." },
@@ -26,21 +26,24 @@ const announcements = [
 ];
 
 // Helper to group announcements by month-year in descending order
-function groupAnnouncementsByMonth(data) {
-  const groups = {};
+function groupAnnouncementsByMonth(
+  data: { date: string; text: string }[]
+): [string, { date: string; text: string }[]][] {
+  const groups: Record<string, { date: string; text: string }[]> = {};
   data.forEach(({ date, text }) => {
     const d = new Date(date);
     const monthYear = d.toLocaleString("default", { month: "long", year: "numeric" });
     if (!groups[monthYear]) groups[monthYear] = [];
     groups[monthYear].push({ date, text });
   });
-  // Sort groups descending by date
-  return Object.entries(groups).sort((a, b) => new Date(b[1][0].date) - new Date(a[1][0].date));
+  return Object.entries(groups).sort(
+    (a, b) => new Date(b[1][0].date).getTime() - new Date(a[1][0].date).getTime()
+  );
 }
 
 export default function Announcements() {
   const [filter, setFilter] = useState("");
-  const tickerRef = useRef(null);
+  const tickerRef = useRef<HTMLDivElement | null>(null);
   const [tickerPaused, setTickerPaused] = useState(false);
 
   // Filtered announcements according to search
@@ -58,7 +61,7 @@ export default function Announcements() {
     if (!tickerRef.current) return;
     const ticker = tickerRef.current;
     let scrollAmount = 0;
-    let requestId;
+    let requestId: number;
 
     const step = () => {
       if (!tickerPaused) {
@@ -111,7 +114,6 @@ export default function Announcements() {
                 </span>
               ))}
             </div>
-            {/* Duplicate for seamless scrolling */}
             <div aria-hidden="true" style={{ display: "inline-block", paddingRight: 100 }}>
               {filteredAnnouncements.map((item, idx) => (
                 <span key={"dup_" + idx} className="mx-6 inline-block">
