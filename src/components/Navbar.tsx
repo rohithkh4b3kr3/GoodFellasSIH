@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Megaphone, UserCircle, Home, Menu, X } from "lucide-react";
 
@@ -7,7 +7,7 @@ export default function Navbar() {
   const [showRoles, setShowRoles] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const handleRoleClick = (role) => {
+  const handleRoleClick = (role : string) => {
     navigate(`/login/${role}`);
     setShowRoles(false);
     setMenuOpen(false);

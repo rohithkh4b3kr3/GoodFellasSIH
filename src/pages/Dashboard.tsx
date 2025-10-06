@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import {
   LineChart,
   Line,
@@ -54,7 +54,7 @@ const smallPieCharts = [
 export default function Dashboard() {
   const [mapView, setMapView] = useState("india");
 
-  const handleViewChange = (view) => {
+  const handleViewChange = (view : string) => {
     setMapView(view);
   };
 
@@ -111,7 +111,7 @@ export default function Dashboard() {
                 fill="#8884d8"
                 label
               >
-                {waterQualityData.map((entry, index) => (
+                {waterQualityData.map((_, index) => (
                   <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                 ))}
               </Pie>
